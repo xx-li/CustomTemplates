@@ -68,12 +68,12 @@ final class ___VARIABLE_moduleName___Engine {
             totoalCount += 1
             datas.insert(model, at: 0)
         case .delete:
-            if let index = datas.index(of: model) {
+            if let index = datas.firstIndex(of: model) {
                 totoalCount -= 1
                 datas.remove(at: index)
             }
         case .edit:
-            if let index = datas.index(of: model) {
+            if let index = datas.firstIndex(of: model) {
                 datas.remove(at: index)
             }
         }
@@ -100,7 +100,7 @@ final class ___VARIABLE_moduleName___Engine {
     
     func requestList(isLoadMore: Bool, complete: ((_ isSuccess: Bool, _ msg: String?)->(Void))?) -> DTBaseRequest {
         let curPage = isLoadMore ? nextPage : 1
-        let request = ___VARIABLE_moduleName___Request.init(nextPage: curPage, pageCount: 15)
+        let request = ___VARIABLE_moduleName___ListRequest.init(nextPage: curPage, pageCount: 15)
         request.start { [weak self] (res, err) in
             guard let self = self else { return }
             guard res.errorDes == nil else {
@@ -131,12 +131,16 @@ final class ___VARIABLE_moduleName___Engine {
             }
         }
         
-        return api
+        return request
     }
 
     func requestOperationList(behaviorType: RequestBehaviorType,
                               model: ___VARIABLE_moduleName___Model,
+                              operationAfterRequest: Bool = true,
                               complete: ((_ isSuccess: Bool, _ msg: String?)->(Void))?) {
+        if operationAfterRequest == false {
+            self.operation(behaviorType: behaviorType, model: model)
+        }
         let request = ___VARIABLE_moduleName___OperationRequest.init(behaviorType: behaviorType, model: model)
         request.start { [weak self] (res, err) in
             guard let self = self else { return }
@@ -151,7 +155,9 @@ final class ___VARIABLE_moduleName___Engine {
             if let biz = request.biz as? Dictionary<String, Any>,
                 let _ = biz["status"] as? String {
                 flag = true
-                self.operation(behaviorType: behaviorType, model: model)
+                if operationAfterRequest == true {
+                    self.operation(behaviorType: behaviorType, model: model)
+                }
             }
             
             if let complete = complete {

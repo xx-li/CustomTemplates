@@ -55,11 +55,11 @@ final class ___VARIABLE_moduleName___ViewController: DTBaseViewController {
                            forCellReuseIdentifier: cellIdentifier)
         // 骨架屏: https://github.com/tigerAndBull/TABAnimated
         tableView.tabAnimated = TABTableAnimated.init(cellClass: ___VARIABLE_moduleName___ListCell.self,
-                                                      cellHeight: <#cell height#>)
+                                                      cellHeight: 44)
 
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(listDidChange),
+            selector: #selector(datasDidChange),
             name: .___VARIABLE_moduleName___DidChangedNotification,
             object: nil
         )
@@ -187,7 +187,7 @@ extension  ___VARIABLE_moduleName___ViewController: UITableViewDataSource {
 extension  ___VARIABLE_moduleName___ViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return <#cell height#>
+        return 44
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

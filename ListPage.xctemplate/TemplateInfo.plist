@@ -53,7 +53,7 @@
 			<key>Identifier</key>
 			<string>function</string>
 			<key>Name</key>
-			<string>Choice Function:</string>
+			<string>Choice Page Type:</string>
 			<key>Description</key>
 			<string>Whether need Edit List</string>
 			<key>Type</key>
@@ -74,6 +74,6 @@
 	<key>SortOrder</key>
 	<string>1</string>
 	<key>Summary</key>
-	<string>This generates a new 🐍 VIPER module.</string>
+	<string>This generates a new mgdt template.</string>
 </dict>
 </plist>

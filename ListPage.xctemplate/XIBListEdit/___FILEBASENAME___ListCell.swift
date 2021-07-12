@@ -10,9 +10,9 @@
 
 import UIKit
 
-class  ___VARIABLE_moduleName___ListCell: UITableViewCell {
+class  ___VARIABLE_moduleName___ListCell: MGSwipeTableCell {
 
-    var didDeleteButtonClick: ((_ cell:SubscribeAlbumsListCell) -> (Void))?
+    var didDeleteButtonClick: ((_ cell: ___VARIABLE_moduleName___ListCell) -> (Void))?
     
     lazy var rightButton:MGSwipeButton =  {
         let btn = MGSwipeButton.init(title: "删除", backgroundColor: UIColor.init(hex: "#FF6868"))
@@ -49,7 +49,7 @@ class  ___VARIABLE_moduleName___ListCell: UITableViewCell {
 
 // MARK: - Extensions -
 
-extension SubscribeAlbumsListCell: MGSwipeTableCellDelegate {
+extension ___VARIABLE_moduleName___ListCell: MGSwipeTableCellDelegate {
     func swipeTableCell(_ cell: MGSwipeTableCell, canSwipe direction: MGSwipeDirection, from point: CGPoint) -> Bool {
         if point.x < self.frame.width / 2.0 {
             return false;

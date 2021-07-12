@@ -11,6 +11,7 @@
 import Foundation
  
 struct ___VARIABLE_moduleName___Model: Codable {
+    let id: String
     // TODO: use https://app.quicktype.io/ web tool to gonerate model by json
 }
 
@@ -18,12 +19,12 @@ struct ___VARIABLE_moduleName___Model: Codable {
 
 extension ___VARIABLE_moduleName___Model: Hashable {
     func hash(into hasher: inout Hasher) {
-        return hasher.combine(cid.hashValue)
+        return hasher.combine(id.hashValue)
     }
 }
 
 extension ___VARIABLE_moduleName___Model: Equatable {
     public static func == (lhs: ___VARIABLE_moduleName___Model, rhs: ___VARIABLE_moduleName___Model) -> Bool {
-        return lhs.cid == rhs.cid
+        return lhs.id == rhs.id
     }
 }
