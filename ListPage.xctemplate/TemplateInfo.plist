@@ -34,23 +34,6 @@
 		</dict>
 		<dict>
 			<key>Identifier</key>
-			<string>interface</string>
-			<key>Name</key>
-			<string>Generate Interface Builder:</string>
-			<key>Description</key>
-			<string>Which interface builder to generate</string>
-			<key>Type</key>
-			<string>popup</string>
-			<key>Default</key>
-			<string>XIB</string>
-			<key>Values</key>
-			<array>
-				<string>XIB</string>
-				<string>None</string>
-			</array>
-		</dict>
-		<dict>
-			<key>Identifier</key>
 			<string>function</string>
 			<key>Name</key>
 			<string>Choice Page Type:</string>
@@ -62,8 +45,26 @@
 			<string>ListEdit</string>
 			<key>Values</key>
 			<array>
+				<string>Blank</string>
+				<string>List</string>
 				<string>ListEdit</string>
-				<string>Default</string>
+			</array>
+		</dict>
+		<dict>
+			<key>Identifier</key>
+			<string>interface</string>
+			<key>Name</key>
+			<string>Generate Interface Builder:</string>
+			<key>Description</key>
+			<string>Which interface builder to generate</string>
+			<key>Type</key>
+			<string>popup</string>
+			<key>Default</key>
+			<string>XIB</string>
+			<key>Values</key>
+			<array>
+				<string>Xib</string>
+				<string>Code</string>
 			</array>
 		</dict>
 	</array>
