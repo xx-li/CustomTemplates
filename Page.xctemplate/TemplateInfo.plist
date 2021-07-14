@@ -18,7 +18,7 @@
 			<key>Identifier</key>
 			<string>moduleName</string>
 			<key>Name</key>
-			<string>New ListPage Name:</string>
+			<string>New Page Name:</string>
 			<key>Required</key>
 			<string>YES</string>
 			<key>Type</key>

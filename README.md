@@ -1,9 +1,9 @@
-# CustomTemplates
-xcode rapid development templates，support craet list page with pull refresh and load more.
+# Xcode自定义模板
+Xcode提供自定义模板功能，可以对同一类型的功能，根据模板来创建多个相关代码文件，用于快速开发及统一开发规范。
 
-## How to use
+## 如何使用
 
-This template is for personal use and there are many dependencies missing. Here only for illustrative display, for reference! (此模板为个人使用，里面有很多依赖缺失。这里仅做说明展示，供参考！)
+`此模板为个人使用，里面有很多依赖缺失。仅做说明展示，供参考.`
 
 1. cd ~/Library/Developer/Xcode/Templates
 2. git clone git@github.com:xx-li/CustomTemplates.git
