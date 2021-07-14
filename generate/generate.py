@@ -26,7 +26,7 @@ import replace_vc
 import replace_engine
 import replace_cell
 
-output_path = "../ListPage.xctemplate"
+output_path = "../Page.xctemplate"
 
 template_path = "./template"
 vc_name = "___FILEBASENAME___ViewController.swift"

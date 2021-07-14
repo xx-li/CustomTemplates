@@ -309,13 +309,11 @@ def replaceXib(str, type):
     res = str
     if "Xib" in type.value:
         if "List" in type.value:
-            res = str.replace("%XIB_TABLEVIEW%", XIB_TABLEVIEW)
-            res = str.replace("%XIB_TABLEVIEW_OUTLET%", XIB_TABLEVIEW_OUTLET)
+            res = res.replace("%XIB_TABLEVIEW%", XIB_TABLEVIEW)
+            res = res.replace("%XIB_TABLEVIEW_OUTLET%", XIB_TABLEVIEW_OUTLET)
         else:
-            res = str.replace("%XIB_TABLEVIEW%", "")
-            res = str.replace("%XIB_TABLEVIEW_OUTLET%", "")
+            res = res.replace("%XIB_TABLEVIEW%", "")
+            res = res.replace("%XIB_TABLEVIEW_OUTLET%", "")
+        return res
     else:
         return None
-
-def callback(a, b):
-    print('Sum = {0}'.format(a+b))
