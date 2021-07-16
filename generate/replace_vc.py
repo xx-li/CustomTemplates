@@ -2,6 +2,61 @@
 
 from common import TemplateType
 
+# 不通过xib定义多页面视图的UI
+MULTIPAGE_VIEW = """
+    lazy var categoryView: DTCategoryView = DTCategoryView.init(frame: CGRect.init(x: 0, y: 0, width: 320, height: 60))
+    lazy var pageView: LXMultiPageView = LXMultiPageView.init(frame: UIScreen.main.bounds)
+"""
+
+# 通过xib定义多页面视图的UI
+MULTIPAGE_VIEW__XIB = """
+    @IBOutlet weak var categoryView: DTCategoryView!
+    @IBOutlet weak var pageView: LXMultiPageView!
+"""
+
+MULTIPAGE_VIEW_LOAD = """
+        self.view.addSubview(categoryView)
+        self.view.addSubview(pageView)
+        categoryView.mas_makeConstraints { (make: MASConstraintMaker!) in
+            make.left.right()?.offset()(0)
+            if #available(iOS 11.0, *) {
+                make.top.equalTo()(self.view.mas_safeAreaLayoutGuideTop)
+            } else {
+                make.top.offset()(64)
+            }
+            make.height.mas_equalTo()(60)
+        }
+        pageView.mas_makeConstraints { (make: MASConstraintMaker!) in
+            make.left.right()?.bottom()?.offset()(0)
+            make.top.equalTo()(self.categoryView.mas_bottom)
+        }
+"""
+
+MULTIPAGE_VIEW_SETUP = """
+        pageView.parentViewController = self
+                
+        self.pageView.childViewControllers = [
+            UIViewController.init(),
+            UIViewController.init()
+        ]
+        
+        categoryView.titles = ["item1", "item2"]
+        categoryView.sliderSize = CGSize.init(width: 12, height: 4)
+        categoryView.sliderView.image = UIImage.init(named: "record_title_silder")
+        categoryView.layoutType = .leftAlign
+        categoryView.leftMargin = 24
+        categoryView.bottomMargin = 10
+        categoryView.subMargin = 28
+        categoryView.selectedTitleFont = UIFont.systemFont(ofSize: 18, weight: .medium)
+        categoryView.selectedTitleColor = UIColor.black.withAlphaComponent(0.85)
+        categoryView.titleFont = UIFont.systemFont(ofSize: 14, weight: .regular)
+        categoryView.titleColor = UIColor.black.withAlphaComponent(0.4)
+        categoryView.contentScrollView = self.pageView.scrollView
+        categoryView.selectedIndex = 0
+"""
+
+
+
 # 不通过xib定义tableView变量
 TABLE_VIEW = """
     lazy var tableView: UITableView = {
@@ -239,39 +294,115 @@ XIB_TABLEVIEW = """
             </constraints>
 """
 
+# xib文件中TableView的outlet
 XIB_TABLEVIEW_OUTLET = '<outlet property="tableView" destination="9ag-Xh-v5E" id="eQW-oy-oWB"/>'
+
+# xib文件中的DTCategoryView 和multiPageView
+XIB_MULTIPAGE_VIEW = """
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XFF-Fh-aKi">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="61"/>
+                    <viewLayoutGuide key="safeArea" id="2Bk-jP-5XI"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    XIB_MULTIPAGE_VIEW
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vBa-WG-U28" customClass="DTCategoryView">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BNI-3Y-4Pz">
+                            <rect key="frame" x="0.0" y="60" width="414" height="1"/>
+                            <color key="backgroundColor" red="0.91004228590000003" green="0.92116957899999996" blue="0.94117999080000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="1" id="iTr-84-gro"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="vBa-WG-U28" firstAttribute="top" secondItem="XFF-Fh-aKi" secondAttribute="top" id="2v8-sK-glq"/>
+                        <constraint firstItem="vBa-WG-U28" firstAttribute="leading" secondItem="XFF-Fh-aKi" secondAttribute="leading" id="4Hz-Ce-lRX"/>
+                        <constraint firstAttribute="height" constant="61" id="AJa-zG-FgS"/>
+                        <constraint firstAttribute="trailing" secondItem="BNI-3Y-4Pz" secondAttribute="trailing" id="Dbd-gR-IaL"/>
+                        <constraint firstAttribute="trailing" secondItem="vBa-WG-U28" secondAttribute="trailing" id="ObC-WS-vnb"/>
+                        <constraint firstAttribute="bottom" secondItem="BNI-3Y-4Pz" secondAttribute="bottom" id="Yib-zW-PM4"/>
+                        <constraint firstItem="BNI-3Y-4Pz" firstAttribute="leading" secondItem="XFF-Fh-aKi" secondAttribute="leading" id="Zcu-eA-TmE"/>
+                        <constraint firstAttribute="bottom" secondItem="vBa-WG-U28" secondAttribute="bottom" constant="5" id="uI0-j8-Crt"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9R1-Iy-M4V" customClass="LXMultiPageView">
+                    <rect key="frame" x="0.0" y="61" width="414" height="747"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                </view>
+            </subviews>
+            <constraints>
+                <constraint firstItem="XFF-Fh-aKi" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="6N9-aR-Hji"/>
+                <constraint firstAttribute="bottom" secondItem="9R1-Iy-M4V" secondAttribute="bottom" id="HDE-Yn-d0H"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="9R1-Iy-M4V" secondAttribute="trailing" id="HmH-2Y-WyB"/>
+                <constraint firstItem="XFF-Fh-aKi" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="IrK-bh-slX"/>
+                <constraint firstItem="XFF-Fh-aKi" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="KBw-cz-p70"/>
+                <constraint firstItem="9R1-Iy-M4V" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="ex5-m3-jHo"/>
+                <constraint firstItem="9R1-Iy-M4V" firstAttribute="top" secondItem="XFF-Fh-aKi" secondAttribute="bottom" id="gMx-rm-bsl"/>
+            </constraints>
+"""
+
+# xib文件中的DTCategoryView 和multiPageView的outlet
+XIB_MULTIPAGE_OUTLET = """
+                <outlet property="categoryView" destination="vBa-WG-U28" id="68C-3C-Ah8"/>
+                <outlet property="pageView" destination="9R1-Iy-M4V" id="u4L-xB-hRN"/>
+"""
+
+
+def replaceMultiPageView(vcStr, type):
+    res = vcStr
+    if "MultiPage" in type.value:
+        res = res.replace('%MULTIPAGE_VIEW_SETUP%', MULTIPAGE_VIEW_SETUP)
+        if "Xib" in type.value:
+             res = res.replace('%MULTIPAGE_VIEW%', MULTIPAGE_VIEW__XIB)
+             res = res.replace('%MULTIPAGE_VIEW_LOAD%', "")
+        else:
+            res = res.replace('%MULTIPAGE_VIEW%', MULTIPAGE_VIEW)
+            res = res.replace('%MULTIPAGE_VIEW_LOAD%', MULTIPAGE_VIEW_LOAD)
+    else:
+        res = res.replace('%MULTIPAGE_VIEW_SETUP%', "")
+        res = res.replace('%MULTIPAGE_VIEW%', "")
+        res = res.replace('%MULTIPAGE_VIEW_LOAD%', "")
+    return res
+
 
 
 def replaceTableView(vcStr, type):
     res = vcStr
-    if "Blank" in type.value:
-        res = res.replace('%TABLE_VIEW%', "")
-        res = res.replace('%TABLE_VIEW_REFRESH%', "")
-        res = res.replace('%TABLE_VIEW_LOAD%', "requestData()")
-    else:
+    if "List" in type.value:
+        res = res.replace('%TABLE_VIEW_REFRESH%', TABLE_VIEW_REFRESH)
         if "Xib" in type.value:
              res = res.replace('%TABLE_VIEW%', TABLE_VIEW__XIB)
              res = res.replace('%TABLE_VIEW_LOAD%', TABLE_VIEW_LOAD__XIB)
         else:
             res = res.replace('%TABLE_VIEW%', TABLE_VIEW)
             res = res.replace('%TABLE_VIEW_LOAD%', TABLE_VIEW_LOAD)
-        res = res.replace('%TABLE_VIEW_REFRESH%', TABLE_VIEW_REFRESH)
+    else:
+        res = res.replace('%TABLE_VIEW%', "")
+        res = res.replace('%TABLE_VIEW_REFRESH%', "")
+        res = res.replace('%TABLE_VIEW_LOAD%', "requestData()")
+
     return res
 
 def replaceRequestData(vcStr, type):
     res = vcStr
-    if "Blank" in type.value:
-        res = res.replace('%REQUEST_DATA%', REQUEST_DATA)
-    else:
+    if "List" in type.value:
         res = res.replace('%REQUEST_DATA%', REQUEST_DATA__LIST)
+    else:
+        res = res.replace('%REQUEST_DATA%', REQUEST_DATA)
+        
     return res
 
 def replaceSyncDataToUI(vcStr, type):
     res = vcStr
-    if "Blank" in type.value:
-        res = res.replace('%SYNC_DATA_TO_UI%', SYNC_DATA_TO_UI)
-    else:
+    if "List" in type.value:
         res = res.replace('%SYNC_DATA_TO_UI%', SYNC_DATA_TO_UI__LIST)
+    else:
+        res = res.replace('%SYNC_DATA_TO_UI%', SYNC_DATA_TO_UI)
+        
     return res
 
 def replaceDeleteOperation(vcStr, type):
@@ -297,7 +428,8 @@ def replaceTableViewDelegate(vcStr, type):
 
 
 def replace(vcStr, type):
-    res = replaceTableView(vcStr, type)
+    res = replaceMultiPageView(vcStr, type)
+    res = replaceTableView(res, type)
     res = replaceRequestData(res, type)
     res = replaceSyncDataToUI(res, type)
     res = replaceDeleteOperation(res, type)
@@ -314,6 +446,14 @@ def replaceXib(str, type):
         else:
             res = res.replace("%XIB_TABLEVIEW%", "")
             res = res.replace("%XIB_TABLEVIEW_OUTLET%", "")
+        
+        if "MultiPage" in type.value:
+            res = res.replace("%XIB_MULTIPAGE_OUTLET%", XIB_MULTIPAGE_OUTLET)
+            res = res.replace("%XIB_MULTIPAGE_VIEW%", XIB_MULTIPAGE_VIEW)
+        else:
+            res = res.replace("%XIB_MULTIPAGE_OUTLET%", "")
+            res = res.replace("%XIB_MULTIPAGE_VIEW%", "")
+        
         return res
     else:
         return None

@@ -9,5 +9,7 @@ class TemplateType(Enum):
     ListXib = "ListXib"
     ListEdit = "ListEditCode"
     ListEditXib = "ListEditXib"
+    MultiPage= "MultiPage"
+    MultiPageXib= "MultiPageXib"
 
 

@@ -18,12 +18,17 @@ final class ___VARIABLE_moduleName___ViewController: DTBaseViewController {
 
     
 
+    
+
     let engine = ___VARIABLE_moduleName___Engine.init()
 
     // MARK: - Lifecycle -
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        
+        
 
         requestData()
 

@@ -13,6 +13,7 @@
             <connections>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 %XIB_TABLEVIEW_OUTLET%
+                %XIB_MULTIPAGE_OUTLET%
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -22,6 +23,7 @@
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             %XIB_TABLEVIEW%
+            %XIB_MULTIPAGE_VIEW%
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
             <point key="canvasLocation" x="132" y="92"/>
         </view>

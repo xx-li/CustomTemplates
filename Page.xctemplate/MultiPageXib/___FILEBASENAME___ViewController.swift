@@ -15,6 +15,9 @@ final class ___VARIABLE_moduleName___ViewController: DTBaseViewController {
     // MARK: - properties -
 
     
+    @IBOutlet weak var categoryView: DTCategoryView!
+    @IBOutlet weak var pageView: LXMultiPageView!
+
 
     
 
@@ -29,6 +32,27 @@ final class ___VARIABLE_moduleName___ViewController: DTBaseViewController {
 
         
         
+        pageView.parentViewController = self
+                
+        self.pageView.childViewControllers = [
+            UIViewController.init(),
+            UIViewController.init()
+        ]
+        
+        categoryView.titles = ["item1", "item2"]
+        categoryView.sliderSize = CGSize.init(width: 12, height: 4)
+        categoryView.sliderView.image = UIImage.init(named: "record_title_silder")
+        categoryView.layoutType = .leftAlign
+        categoryView.leftMargin = 24
+        categoryView.bottomMargin = 10
+        categoryView.subMargin = 28
+        categoryView.selectedTitleFont = UIFont.systemFont(ofSize: 18, weight: .medium)
+        categoryView.selectedTitleColor = UIColor.black.withAlphaComponent(0.85)
+        categoryView.titleFont = UIFont.systemFont(ofSize: 14, weight: .regular)
+        categoryView.titleColor = UIColor.black.withAlphaComponent(0.4)
+        categoryView.contentScrollView = self.pageView.scrollView
+        categoryView.selectedIndex = 0
+
 
         requestData()
 

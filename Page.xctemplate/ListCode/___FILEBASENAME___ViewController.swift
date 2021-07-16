@@ -15,6 +15,8 @@ final class ___VARIABLE_moduleName___ViewController: DTBaseViewController {
     // MARK: - properties -
 
     
+
+    
     lazy var tableView: UITableView = {
         let tableView = UITableView.init(frame: self.view.bounds, style: .plain)
         tableView.delegate = self
@@ -50,6 +52,9 @@ final class ___VARIABLE_moduleName___ViewController: DTBaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        
+        
 
         
         view.addSubview(tableView)

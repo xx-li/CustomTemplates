@@ -14,6 +14,8 @@ final class ___VARIABLE_moduleName___ViewController: DTBaseViewController {
 
     // MARK: - properties -
 
+    
+
     @IBOutlet weak var tableView: UITableView!
 
     
@@ -42,6 +44,9 @@ final class ___VARIABLE_moduleName___ViewController: DTBaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        
+        
 
         
         tableView.register(UINib.init(nibName: cellIdentifier, bundle: nil),

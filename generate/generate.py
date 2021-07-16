@@ -87,8 +87,6 @@ for name, templateType in TemplateType.__members__.items():
         os.remove(p)
 
     # testcreatTemplate(vc_name, templateType, path, replace_vc.replace)
-
-    # 创建VC模板
     creatTemplate(vc_name, templateType, path, callback=replace_vc.replace)
     creatTemplate(vc_xib_name, templateType, path, callback=replace_vc.replaceXib)
 

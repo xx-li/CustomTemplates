@@ -14,6 +14,8 @@ final class ___VARIABLE_moduleName___ViewController: DTBaseViewController {
 
     // MARK: - properties -
 
+    %MULTIPAGE_VIEW%
+
     %TABLE_VIEW%
 
     %TABLE_VIEW_REFRESH%
@@ -24,6 +26,9 @@ final class ___VARIABLE_moduleName___ViewController: DTBaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        %MULTIPAGE_VIEW_LOAD%
+        %MULTIPAGE_VIEW_SETUP%
 
         %TABLE_VIEW_LOAD%
 
