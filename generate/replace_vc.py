@@ -88,6 +88,7 @@ TABLE_VIEW_REFRESH = """
             self?.requestList(isLoadMore: true)
         }
         tableView.mj_footer = footer
+        footer.isHidden = true
         return footer
     }()
 """
@@ -166,7 +167,8 @@ REQUEST_DATA__LIST = """
                 QMUITips.show(withText: msg)
                 return
             }
-            
+
+            self.tableView.mj_footer?.isHidden = self.engine!.dataSource.count == 0
             if self.engine.datas.count == 0 {
                 self.view.dt_showNoContentView()
             } else if self.engine.isCanLoadMore() {
@@ -281,9 +283,13 @@ TABLE_VIEW_DELEGATE_DELETE = """
 # xib文件中的TableView
 XIB_TABLEVIEW = """
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="9ag-Xh-v5E">
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="9ag-Xh-v5E">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="xu5-h9-iZD"/>
+                        <outlet property="delegate" destination="-1" id="oX8-ru-0nf"/>
+                    </connections>
                 </tableView>
             </subviews>
             <constraints>

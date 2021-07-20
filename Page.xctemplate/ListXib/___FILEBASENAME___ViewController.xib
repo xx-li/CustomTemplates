@@ -24,9 +24,13 @@
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="9ag-Xh-v5E">
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="9ag-Xh-v5E">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="xu5-h9-iZD"/>
+                        <outlet property="delegate" destination="-1" id="oX8-ru-0nf"/>
+                    </connections>
                 </tableView>
             </subviews>
             <constraints>

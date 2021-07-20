@@ -34,6 +34,7 @@ final class ___VARIABLE_moduleName___ViewController: DTBaseViewController {
             self?.requestList(isLoadMore: true)
         }
         tableView.mj_footer = footer
+        footer.isHidden = true
         return footer
     }()
 
@@ -87,7 +88,8 @@ final class ___VARIABLE_moduleName___ViewController: DTBaseViewController {
                 QMUITips.show(withText: msg)
                 return
             }
-            
+
+            self.tableView.mj_footer?.isHidden = self.engine!.dataSource.count == 0
             if self.engine.datas.count == 0 {
                 self.view.dt_showNoContentView()
             } else if self.engine.isCanLoadMore() {
