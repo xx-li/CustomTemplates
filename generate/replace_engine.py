@@ -128,14 +128,14 @@ REQUEST_DATA__LIST = """
             var flag = false
             // 拿到列表数据和列表大小
             if let biz = request.biz as? Dictionary<String, Any>,
-                let jsonList = biz["list"] ,
+                let jsonList = biz["content"] ,
                 let listData = try? JSONSerialization.data(withJSONObject: jsonList, options: []),
                 let list = try? decoder.decode([___VARIABLE_moduleName___Model].self, from: listData),
-                let totoalCount = biz["totoalCount"] as? Int {
+                let totalCount = biz["count"] as? Int {
                 
                 if !isLoadMore { self.datas.removeAll() }
                 self.nextPage = isLoadMore ? self.nextPage + 1 : 2
-                self.totoalCount = totoalCount
+                self.totalCount = totalCount
                 self.datas.append(contentsOf: list)
                 flag = true
             }
@@ -149,7 +149,7 @@ REQUEST_DATA__LIST = """
     }
 
     func isCanLoadMore() -> Bool {
-        return self.datas.count < totoalCount;
+        return self.datas.count < totalCount;
     }
 """
 

@@ -150,6 +150,7 @@ REQUEST_DATA__LIST = """
 
     @objc func requestList(isLoadMore:Bool) {
         view.dt_hiddenAllEmpty()
+        tableView.tab_startAnimation()
         self.dt_request = engine.requestList(isLoadMore: isLoadMore) { [weak self] (isSuccess, msg) in
             guard let self = self else { return }
             
@@ -168,7 +169,7 @@ REQUEST_DATA__LIST = """
                 return
             }
 
-            self.tableView.mj_footer?.isHidden = self.engine!.dataSource.count == 0
+            self.tableView.mj_footer?.isHidden = self.engine.datas.count == 0
             if self.engine.datas.count == 0 {
                 self.view.dt_showNoContentView()
             } else if self.engine.isCanLoadMore() {
